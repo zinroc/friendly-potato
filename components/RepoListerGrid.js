@@ -1,9 +1,12 @@
 import styled from "@emotion/styled";
-import { Grid, GridItem } from "../components/common";
+
+import { placeholder, shadow } from "../styles/colors";
+
+import { Grid, GridItem, Error } from "../components/common";
 
 const RepoCard = styled.div`
   margin: 10px;
-  box-shadow: 2px 2px 2px 2px #d1d1d1;
+  box-shadow: 2px 2px 2px 2px ${shadow};
   height: 200px;
   padding: 10px;
   border-radius: 10px;
@@ -16,7 +19,7 @@ const RepoTitle = styled.div`
 `;
 
 const RepoStats = styled.div`
-  color: #757575;
+  color: ${placeholder};
   display: flex;
   justify-content: space-between;
   font-size: 13px;
@@ -36,22 +39,27 @@ const RepoDescription = styled.div`
   font-weight: 300;
 `;
 
-const RepoListerGrid = ({ repos }) => (
-  <Grid>
-    {repos.map((repo) => (
-      <GridItem key={repo.id}>
-        <RepoCard>
-          <RepoTitle>{repo.full_name}</RepoTitle>
-          <RepoStats>
-            <RepoStat>{repo.stargazers_count} Stargazers</RepoStat>
-            <RepoStat>{repo.watchers_count} People Watching</RepoStat>
-          </RepoStats>
+const RepoListerGrid = ({ repos }) => {
+  if (repos.length === 0)
+    return <Error>This Account does not have any Repos</Error>;
 
-          <RepoDescription>{repo.description}</RepoDescription>
-        </RepoCard>
-      </GridItem>
-    ))}
-  </Grid>
-);
+  return (
+    <Grid>
+      {repos.map((repo) => (
+        <GridItem key={repo.id}>
+          <RepoCard>
+            <RepoTitle>{repo.full_name}</RepoTitle>
+            <RepoStats>
+              <RepoStat>{repo.stargazers_count} Stargazers</RepoStat>
+              <RepoStat>{repo.watchers_count} People Watching</RepoStat>
+            </RepoStats>
+
+            <RepoDescription>{repo.description}</RepoDescription>
+          </RepoCard>
+        </GridItem>
+      ))}
+    </Grid>
+  );
+};
 
 export default RepoListerGrid;

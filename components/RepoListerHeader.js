@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 
 import { fetchReposForOrg, fetchReposForUser } from "../api/github";
 
+import { dark, placeholderLight } from "../styles/colors";
+
 import {
   SET_GITHUB_ACCOUNT_NAME,
   FETCHING_REPOS_FAILURE,
@@ -30,14 +32,14 @@ const HeaderContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  background-color: #363636;
-  border: #363636 1px solid;
+  background-color: ${dark};
+  border: ${dark} 1px solid;
   padding: 12px;
   color: white;
   border-radius: 5px;
   width: 350px;
   ::placeholder {
-    color: #d9d9d9;
+    color: ${placeholderLight};
   }
 `;
 

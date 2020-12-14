@@ -1,5 +1,7 @@
 import styled from "@emotion/styled";
 
+import { dark, lightblue } from "../styles/colors";
+
 const ToggleLabel = styled.label`
   display: inline-flex;
   font-size: 20px;
@@ -12,8 +14,8 @@ const ToggleContainer = styled.div`
 
 // @TODO - refactor this into a radio input
 const ToggleOption = styled.button`
-  border: solid #757575 1px;
-  color: #757575;
+  border: solid ${dark} 1px;
+  color: ${dark};
   padding: 5px;
   font-size: 13px;
   width: 150px;
@@ -26,9 +28,9 @@ const ToggleOption = styled.button`
   ${({ isLastOption }) =>
     isLastOption &&
     `border-top-right-radius: 5px; border-bottom-right-radius: 5px;`}
-${({ isActive }) => isActive && `background-color: #e0fdff;`}
-:hover {
-    background-color: #e0fdff;
+  ${({ isActive }) => isActive && `background-color: ${lightblue};`}
+  :hover {
+    background-color: ${lightblue};
   }
 `;
 
