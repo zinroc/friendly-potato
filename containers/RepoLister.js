@@ -39,16 +39,18 @@ const RepoLister = () => {
   const loading = useSelector((state) => state.main.loading);
   const repos = useSelector((state) => state.main.repos);
   const sortBy = useSelector((state) => state.main.sortBy);
-  const githubAccountName = useSelector(
-    (state) => state.main.githubAccountName
+  const githubAccountDisplayName = useSelector(
+    (state) => state.main.githubAccountDisplayName
   );
 
   return (
     <>
       <RepoListerHeader />
       <Body>
-        {githubAccountName && (
-          <H2>Listing repositories for the user "{githubAccountName}" </H2>
+        {githubAccountDisplayName && (
+          <H2 name="listingForUser">
+            Listing repositories for the user "{githubAccountDisplayName}"{" "}
+          </H2>
         )}
         <Toggle
           label="Sort By"
@@ -68,7 +70,10 @@ const RepoLister = () => {
           (i.e. org is misspelled)
         */}
         {error && <Error>{error}</Error>}
-        {repos.length === 0 && githubAccountName && !loading && !error ? (
+        {repos.length === 0 &&
+        githubAccountDisplayName &&
+        !loading &&
+        !error ? (
           <Error>This Account does not have any Repos</Error>
         ) : (
           <RepoListerGrid repos={repos} />

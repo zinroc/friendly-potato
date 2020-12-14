@@ -87,7 +87,7 @@ const RepoListerHeader = () => {
             onSubmit={(formValues) => {
               dispatch({
                 type: SET_GITHUB_ACCOUNT_NAME,
-                githubAccountName: formValues.searchInput
+                githubAccountDisplayName: formValues.searchInput
                   ? formValues.searchInput.value
                   : "",
               });
@@ -103,7 +103,7 @@ const RepoListerHeader = () => {
               id="searchInput"
               placeholder="Search Users/Orgs"
             />{" "}
-            <Button> Search </Button>
+            <Button name="submitSearch"> Search </Button>
           </Form>
         </div>
       </HeaderContainer>

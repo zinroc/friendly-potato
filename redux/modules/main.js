@@ -12,7 +12,7 @@ const initialState = {
   error: "",
   loading: false,
   repos: [],
-  githubAccountName: "",
+  githubAccountDisplayName: "",
   sortBy: "",
 };
 
@@ -57,7 +57,7 @@ export default function reducer(state = initialState, action) {
     case SET_GITHUB_ACCOUNT_NAME: {
       return {
         ...state,
-        githubAccountName: action.githubAccountName,
+        githubAccountDisplayName: action.githubAccountDisplayName,
       };
     }
     default:
