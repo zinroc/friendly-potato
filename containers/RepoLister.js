@@ -7,7 +7,7 @@ import RepoListerHeader from "../components/RepoListerHeader";
 import RepoListerGrid from "../components/RepoListerGrid";
 import Toggle from "../components/Toggle";
 
-import { Error, Loading, Body, Page, H2 } from "../components/common";
+import { Error, Loading, Body, H2 } from "../components/common";
 
 export const sortOptions = {
   ALPHABETICAL: "Alphabetical",
