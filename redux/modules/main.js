@@ -1,4 +1,4 @@
-import { resolveSort } from "../../pages/index";
+import { resolveSort } from "../../containers/RepoLister";
 
 export const FETCHING_REPOS_START = "main/START_FETCHING_REPOS";
 export const FETCHING_REPOS_SUCCESS = "main/START_FETCHING_SUCCESS";
