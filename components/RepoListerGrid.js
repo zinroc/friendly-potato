@@ -39,27 +39,21 @@ const RepoDescription = styled.div`
   font-weight: 300;
 `;
 
-const RepoListerGrid = ({ repos }) => {
-  if (repos.length === 0)
-    return <Error>This Account does not have any Repos</Error>;
+const RepoListerGrid = ({ repos }) => (
+  <Grid>
+    {repos.map((repo) => (
+      <GridItem key={repo.id}>
+        <RepoCard>
+          <RepoTitle>{repo.full_name}</RepoTitle>
+          <RepoStats>
+            <RepoStat>{repo.stargazers_count} Stargazers</RepoStat>
+            <RepoStat>{repo.watchers_count} People Watching</RepoStat>
+          </RepoStats>
 
-  return (
-    <Grid>
-      {repos.map((repo) => (
-        <GridItem key={repo.id}>
-          <RepoCard>
-            <RepoTitle>{repo.full_name}</RepoTitle>
-            <RepoStats>
-              <RepoStat>{repo.stargazers_count} Stargazers</RepoStat>
-              <RepoStat>{repo.watchers_count} People Watching</RepoStat>
-            </RepoStats>
-
-            <RepoDescription>{repo.description}</RepoDescription>
-          </RepoCard>
-        </GridItem>
-      ))}
-    </Grid>
-  );
-};
-
+          <RepoDescription>{repo.description}</RepoDescription>
+        </RepoCard>
+      </GridItem>
+    ))}
+  </Grid>
+);
 export default RepoListerGrid;

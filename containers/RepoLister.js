@@ -68,7 +68,11 @@ const RepoLister = () => {
           (i.e. org is misspelled)
         */}
         {error && <Error>{error}</Error>}
-        <RepoListerGrid repos={repos} />
+        {repos.length === 0 && githubAccountName && !loading && !error ? (
+          <Error>This Account does not have any Repos</Error>
+        ) : (
+          <RepoListerGrid repos={repos} />
+        )}
       </Body>
     </>
   );
