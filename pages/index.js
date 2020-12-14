@@ -25,6 +25,9 @@ const Header = styled.div`
   display: flex;
   padding: 5px;
   font-size: 25px;
+  @media (max-width: 700px) {
+    display: block;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -57,6 +60,9 @@ const HeaderTitle = styled.div`
 
 const Spacer = styled.div`
   height: ${({ height }) => (height ? height : "0px")};
+  @media (max-width: 700px) {
+    ${({ mobileHeight }) => mobileHeight && `height: ${mobileHeight};`}
+  }
 `;
 
 const Grid = styled.div`
@@ -277,7 +283,7 @@ export default function Home() {
           </Form>
         </div>
       </Header>
-      <Spacer height="75px" />
+      <Spacer height="75px" mobileHeight="150px;" />
       <Body>
         {githubAccountName && (
           <H2>Listing repositories for the user "{githubAccountName}" </H2>
@@ -293,9 +299,13 @@ export default function Home() {
             })
           }
         />
-
         {loading && <Loading>"...Loading"</Loading>}
-        {error && <Error>{error}</Error>}
+        {/*
+          @TODO - discuss how error messages should be displayed.
+          Should there be more descriptive message for common errors
+          (i.e. org is misspelled)
+        */}
+        {error && <Error>{error}</Error>}{" "}
         <Grid>
           {repos.map((repo) => (
             <GridItem key={repo.id}>
