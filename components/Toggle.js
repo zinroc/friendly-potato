@@ -35,6 +35,9 @@ const ToggleOption = styled.button`
 `;
 
 const Toggle = ({ options, activeOption, label, onChange = () => {} }) => {
+  // @TODO - consider allowing options to also be a [{label, value}, ...] array to make this component more generic
+  if (Array.isArray(options)) return;
+
   const keys = Object.keys(options);
   return (
     <ToggleLabel>
