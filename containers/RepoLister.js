@@ -64,11 +64,6 @@ const RepoLister = () => {
           }
         />
         {loading && <Loading>"...Loading"</Loading>}
-        {/*
-          @TODO - discuss how error messages should be displayed.
-          Should there be more descriptive message for common errors
-          (i.e. org is misspelled)
-        */}
         {error && <Error>{error}</Error>}
         {repos.length === 0 &&
         githubAccountDisplayName &&
