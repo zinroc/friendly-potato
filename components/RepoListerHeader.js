@@ -51,7 +51,7 @@ const HeaderTitle = styled.div`
 const fetchReposWrapper = async ({ dispatch, searchInput }) => {
   dispatch({ type: FETCHING_REPOS_START, searchInput });
   try {
-    const res = await fetchReposForOrg({ githubAccount: searchInput.value });
+    const res = await fetchReposForOrg({ githubAccount: searchInput });
     dispatch({ type: FETCHING_REPOS_SUCCESS, repos: res.data });
   } catch (err) {
     try {
@@ -64,7 +64,7 @@ const fetchReposWrapper = async ({ dispatch, searchInput }) => {
           For now only show user repos if an org with the same name is not found.
         */
       const res = await fetchReposForUser({
-        githubAccount: searchInput.value,
+        githubAccount: searchInput,
       });
       dispatch({ type: FETCHING_REPOS_SUCCESS, repos: res.data });
     } catch (err) {
@@ -85,16 +85,17 @@ const RepoListerHeader = () => {
         <div>
           <Form
             onSubmit={(formValues) => {
+              if (!formValues.searchInput || !formValues.searchInput.value)
+                return;
+
               dispatch({
                 type: SET_GITHUB_ACCOUNT_NAME,
-                githubAccountDisplayName: formValues.searchInput
-                  ? formValues.searchInput.value
-                  : "",
+                githubAccountDisplayName: formValues.searchInput.value,
               });
 
               fetchReposWrapper({
                 dispatch,
-                searchInput: formValues.searchInput,
+                searchInput: formValues.searchInput.value,
               });
             }}
           >
