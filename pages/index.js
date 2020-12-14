@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { fetchRepos } from "../api/github";
+import { fetchReposForOrg, fetchReposForUser } from "../api/github";
 
 import {
   FETCHING_REPOS_FAILURE,
@@ -240,13 +240,28 @@ export default function Home() {
   const fetchReposWrapper = async ({ searchInput }) => {
     dispatch({ type: FETCHING_REPOS_START, searchInput });
     try {
-      const res = await fetchRepos({ githubAccount: searchInput.value });
+      const res = await fetchReposForOrg({ githubAccount: searchInput.value });
       dispatch({ type: FETCHING_REPOS_SUCCESS, repos: res.data });
     } catch (err) {
-      dispatch({
-        type: FETCHING_REPOS_FAILURE,
-        error: err,
-      });
+      try {
+        /*
+          @TODO - investigate - 
+          is it possible for a user to have the same name as an org?
+          how should the repos that belong to the user be differentiated
+          from those that belong to the org?
+
+          For now only show user repos if an org with the same name is not found.
+        */
+        const res = await fetchReposForUser({
+          githubAccount: searchInput.value,
+        });
+        dispatch({ type: FETCHING_REPOS_SUCCESS, repos: res.data });
+      } catch (err) {
+        dispatch({
+          type: FETCHING_REPOS_FAILURE,
+          error: err,
+        });
+      }
     }
   };
 
