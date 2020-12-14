@@ -9,7 +9,7 @@ import Toggle from "../components/Toggle";
 
 import { Error, Loading, Body, Page, H2 } from "../components/common";
 
-const sortOptions = {
+export const sortOptions = {
   ALPHABETICAL: "Alphabetical",
   MOST_STARTS: "By Most Stars",
 };
